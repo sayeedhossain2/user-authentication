@@ -7,9 +7,12 @@ const DetailsInfo = ({ allinfo, setConpanyInfo, isChange, setIsChange }) => {
     const agree = window.confirm(`Are you sure You want to delete `);
     if (agree) {
       // console.log("deleting success");
-      fetch(`http://localhost:5000/companyInfor/${allinfo._id}`, {
-        method: "DELETE",
-      })
+      fetch(
+        `https://job-task-server-nu.vercel.app/companyInfor/${allinfo._id}`,
+        {
+          method: "DELETE",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

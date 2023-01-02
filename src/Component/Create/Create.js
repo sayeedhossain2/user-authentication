@@ -20,7 +20,7 @@ const handleSignup = (event) => {
     password: password,
   };
 
-  fetch("http://localhost:5000/details", {
+  fetch("https://job-task-server-nu.vercel.app/details", {
     method: "POST",
     headers: {
       "content-type": "application/json",

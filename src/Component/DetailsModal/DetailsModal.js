@@ -21,7 +21,7 @@ const DetailsModal = ({ conpanyInfo, setConpanyInfo }) => {
       password,
     };
 
-    fetch(`http://localhost:5000/companyUpdate/${_id}`, {
+    fetch(`https://job-task-server-nu.vercel.app/companyUpdate/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

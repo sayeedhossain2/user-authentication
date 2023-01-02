@@ -13,7 +13,9 @@ const Home = () => {
   const { data = [] } = useQuery({
     queryKey: ["alldetails", isChange],
     queryFn: () =>
-      fetch("http://localhost:5000/alldetails").then((res) => res.json()),
+      fetch("https://job-task-server-nu.vercel.app/alldetails").then((res) =>
+        res.json()
+      ),
   });
 
   if (loading) {
