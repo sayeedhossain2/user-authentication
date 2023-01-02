@@ -1,23 +1,26 @@
 import React from "react";
+import Swal from "sweetalert2";
 
-const handleDelete = (allinfo) => {
-  const agree = window.confirm(`Are you sure You want to delete `);
-  if (agree) {
-    // console.log("deleting success");
-    fetch(`http://localhost:5000/companyInfor/${allinfo._id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.deletedCount > 0) {
-          alert("Deleted Successfully");
-        }
-      });
-  }
-};
+const DetailsInfo = ({ allinfo, setConpanyInfo, isChange, setIsChange }) => {
+  const handleDelete = (allinfo) => {
+    // console.log(allinfo);
+    const agree = window.confirm(`Are you sure You want to delete `);
+    if (agree) {
+      // console.log("deleting success");
+      fetch(`http://localhost:5000/companyInfor/${allinfo._id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            setIsChange(!isChange);
+            Swal.fire("Good job!", "Deleted Successfully!", "success");
+          }
+        });
+    }
+  };
 
-const DetailsInfo = ({ allinfo, setConpanyInfo }) => {
   return (
     <tr>
       <td>

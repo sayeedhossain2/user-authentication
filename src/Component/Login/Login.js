@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../context/AuthProvider/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,15 +9,22 @@ import { FaEnvelope, FaGoogle } from "react-icons/fa";
 import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
-  const { loginUser, loading, googleUserLogin } = useContext(authContext);
+  const { loginUser, loading, googleUserLogin, user } = useContext(authContext);
   const [successfully, setSuccessfully] = useState("");
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
   const location = useLocation();
 
   const googleProvider = new GoogleAuthProvider();
 
   const from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (user?.email) {
+      navigate(from, { replace: true });
+    }
+  }, [from, navigate, user?.email]);
 
   if (loading) {
     return (
@@ -37,9 +44,9 @@ const Login = () => {
         const user = userCredential.user;
         setSuccessfully("User Login Successfully");
         setError("");
-        toast("Wow Login successfully");
+        toast.success("Wow Login successfully");
         form.reset();
-        navigate(from, { replace: true });
+        // navigate(from, { replace: true });
       })
 
       .catch((error) => {
@@ -53,18 +60,14 @@ const Login = () => {
   const handleWithGoogle = () => {
     googleUserLogin(googleProvider)
       .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
         const user = result.user;
-
-        toast("Wow Login successfully");
-        // navigate(from, { replace: true });
+        if (user.email) {
+          toast.success("Wow Login successfully");
+          console.log(user);
+        }
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.error(error);
       });
   };
 

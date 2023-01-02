@@ -50,7 +50,7 @@ const Navber = () => {
   );
 
   return (
-    <div className="sticky top-0 z-50">
+    <div className="">
       <div className="navbar bg-purple-300">
         <div className="navbar-start">
           <div className="dropdown">

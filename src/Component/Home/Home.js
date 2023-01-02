@@ -8,8 +8,10 @@ import { authContext } from "../../context/AuthProvider/AuthProvider";
 const Home = () => {
   const { loading } = useContext(authContext);
   const [conpanyInfo, setConpanyInfo] = useState(null);
+  const [isChange, setIsChange] = useState(true);
+
   const { data = [] } = useQuery({
-    queryKey: ["alldetails"],
+    queryKey: ["alldetails", isChange],
     queryFn: () =>
       fetch("http://localhost:5000/alldetails").then((res) => res.json()),
   });
@@ -47,12 +49,17 @@ const Home = () => {
                 key={allinfo._id}
                 allinfo={allinfo}
                 setConpanyInfo={setConpanyInfo}
+                setIsChange={setIsChange}
+                isChange={isChange}
               ></DetailsInfo>
             ))}
           </tbody>
 
           {conpanyInfo && (
-            <DetailsModal conpanyInfo={conpanyInfo}></DetailsModal>
+            <DetailsModal
+              conpanyInfo={conpanyInfo}
+              setConpanyInfo={setConpanyInfo}
+            ></DetailsModal>
           )}
         </table>
       </div>

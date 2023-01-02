@@ -1,9 +1,9 @@
 import React from "react";
 
-const DetailsModal = ({ conpanyInfo }) => {
+const DetailsModal = ({ conpanyInfo, setConpanyInfo }) => {
   const { name, userid, password, _id } = conpanyInfo;
 
-  console.log(conpanyInfo);
+  console.log(name, userid);
 
   const handleUpdate = (event) => {
     event.preventDefault();
@@ -12,7 +12,7 @@ const DetailsModal = ({ conpanyInfo }) => {
     const userid = form.userid.value;
     const password = form.Password.value;
 
-    console.log(name, userid, password);
+    // console.log(name, userid, password);
 
     const alldata = {
       name,
@@ -49,6 +49,7 @@ const DetailsModal = ({ conpanyInfo }) => {
       <div className="modal">
         <div className="modal-box relative">
           <label
+            onClick={() => setConpanyInfo(null)}
             htmlFor="details-info-company"
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
