@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from "sweetalert2";
 
 const DetailsModal = ({ conpanyInfo, setConpanyInfo }) => {
   const { name, userid, password, _id } = conpanyInfo;
@@ -31,7 +32,7 @@ const DetailsModal = ({ conpanyInfo, setConpanyInfo }) => {
       .then((data) => {
         console.log(data);
         if (data.modifiedCount > 0) {
-          alert("Updated Successfully");
+          Swal.fire("Good job!", "Updated Successfully!", "success");
         }
       });
   };
