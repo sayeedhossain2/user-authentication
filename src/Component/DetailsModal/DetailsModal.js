@@ -1,7 +1,12 @@
 import React from "react";
 import Swal from "sweetalert2";
 
-const DetailsModal = ({ conpanyInfo, setConpanyInfo }) => {
+const DetailsModal = ({
+  conpanyInfo,
+  setConpanyInfo,
+  setIsChange,
+  isChange,
+}) => {
   const { name, userid, password, _id } = conpanyInfo;
 
   console.log(name, userid);
@@ -32,6 +37,7 @@ const DetailsModal = ({ conpanyInfo, setConpanyInfo }) => {
       .then((data) => {
         console.log(data);
         if (data.modifiedCount > 0) {
+          setIsChange(!isChange);
           Swal.fire("Good job!", "Updated Successfully!", "success");
         }
       });

@@ -61,6 +61,8 @@ const Home = () => {
             <DetailsModal
               conpanyInfo={conpanyInfo}
               setConpanyInfo={setConpanyInfo}
+              setIsChange={setIsChange}
+              isChange={isChange}
             ></DetailsModal>
           )}
         </table>
